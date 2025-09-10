@@ -96,18 +96,10 @@ int main(int argc, char **argv) {
   stringifyBits(buf, trans);
   printf("Transmitted bits: %s\n", buf);
   printf("Transmitted length: %d bits\n", M + C);
-  // Accept bit corruption probability.
-  printf("Enter bit corruption/flipping probability (0.0 - 1.0): ");
-  double perr;
-  scanf_s("%lf", &perr);
-  if (perr<0.0 || perr>1.0) { printf("ERROR: Invalid probability\n"); return 1; }
-  printf("\n");
-  // Output received bits.
-  vector<bool> recv;
-  recv = corruptBits(trans, perr);
-  stringifyBits(buf, trans);
-  printf("Transmitted bits: %s\n", buf);
-  stringifyBits(buf, recv);
+  // Accept received bits.
+  printf("Enter received bits: ");
+  scanf_s("%s", buf, sizeof(buf));
+  vector<bool> recv = parseBits(buf);
   printf("Received bits:    %s\n", buf);
   printf("Received length: %d bits\n", M + C);
   printf("\n");
